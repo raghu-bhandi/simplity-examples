@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<record
+	xmlns="http://www.simplity.org/schema"
+	name="simpleStructure"
+	recordType="structure"
+	sqlStructName="SIMPLETYPE"
+>
+	<!-- important to specify sqlStructName for this record, since it is used 
+		as a struct in a stored procedure -->
+	<fields>
+		<field
+			name="nbr"
+			dataType="number" />
+		<field
+			name="txt"
+			dataType="text" />
+	</fields>
+</record>

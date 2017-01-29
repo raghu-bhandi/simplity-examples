@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<record
+	xmlns="http://www.simplity.org/schema"
+	name="complexStructure"
+	recordType="structure"
+	sqlStructName="COMPLEXTYPE"
+>
+	<!-- important to specify sqlStructName for this record, since it is used 
+		as a struct in a stored procedure -->
+	<fields>
+		<field
+			name="nbr"
+			dataType="number" />
+		<!-- this is an array of text -->
+		<field
+			name="txtArr"
+			dataType="text"
+			fieldType="valueArray"
+			sqlTypeName="TEXTARRAY" />
+		<!-- this is a structure, as defined in another record -->
+		<field
+			name="ds"
+			fieldType="record"
+			referredRecord="simpleStructure"
+			sqlTypeName="SIMPLETYPE" />
+		<!-- this is an array of records. This is our most complex feld -->
+		<field
+			name="dsArr"
+			fieldType="recordArray"
+			referredRecord="simpleStructure" 
+			sqlTypeName="SIMPLETYPEARRAY"/>
+	</fields>
+</record>

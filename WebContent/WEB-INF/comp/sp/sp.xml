@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<storedProcedure
+	xmlns="http://www.simplity.org/schema"
+	procedureName="TEST_PROC"
+	name="sp"
+>
+	<!-- name - as referred in service.xml precedureName - should match the 
+		name in your RDBMS -->
+
+	<parameters>
+		<!-- name as referred your service context, input output etc.. It need 
+			not match the parameter names in your RDBMS. dataType must be declared in 
+			an xml file under dt folder, and entries must be updated in your delcaredDataTypes.xsd -->
+		<procedureParameter
+			name="txt"
+			dataType="text"
+			inOutType="inOut" />
+
+		<!-- sqArrayType should match the type declaration in your RDBMS -->
+		<procedureParameter
+			name="txtArr"
+			dataType="text"
+			inOutType="inOut"
+			isArray="true"
+			sqlArrayType="TEXTARRAY" />
+		<procedureParameter
+			name="nbr"
+			dataType="number"
+			inOutType="inOut" />
+
+		<procedureParameter
+			name="nbrArr"
+			dataType="number"
+			inOutType="inOut"
+			isArray="true"
+			sqlArrayType="INTARRAY" />
+		<procedureParameter
+			name="dec"
+			dataType="decimal"
+			inOutType="inOut" />
+
+		<procedureParameter
+			name="decArr"
+			dataType="decimal"
+			inOutType="inOut"
+			isArray="true"
+			sqlArrayType="DECARRAY" />
+		<procedureParameter
+			name="dat"
+			dataType="date"
+			inOutType="inOut" />
+
+		<procedureParameter
+			name="datArr"
+			dataType="date"
+			inOutType="inOut"
+			isArray="true"
+			sqlArrayType="DATEARRAY" />
+		<!-- for a data structure, sqlObjectType must match declaration name in 
+			the RDBMS. A record is to be defined with matching structure. Field names 
+			need not match -->
+		<procedureParameter
+			name="ds"
+			inOutType="inOut"
+			sqlObjectType="SIMPLETYPE"
+			recordName="simpleStructure" />
+
+		<procedureParameter
+			name="dsArr"
+			inOutType="inOut"
+			isArray="true"
+			sqlObjectType="SIMPLETYPE"
+			sqlArrayType="SIMPLETYPEARRAY"
+			recordName="simpleStructure" />
+
+		<!-- This is a data structure with some non-primitive members. -->
+		<procedureParameter
+			name="cds"
+			inOutType="inOut"
+			sqlObjectType="COMPLEXTYPE"
+			recordName="complexStructure" />
+
+		<procedureParameter
+			name="cdsArr"
+			inOutType="inOut"
+			isArray="true"
+			sqlObjectType="COMPLEXTYPE"
+			sqlArrayType="COMPLEXTYPEARRAY"
+			recordName="complexStructure" />
+	</parameters>
+</storedProcedure>

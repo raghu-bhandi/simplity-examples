@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Stored Procedure</title>
+<script type="text/javascript" src="lib/simplity-min.js"></script>
+
+<script type="text/javascript">
+	/**
+	 * invoked on page load
+	 */
+	var login = function() {
+		/*
+		 * populate service name and input from examples..
+		 */
+		if (window.TEST_JSON) {
+			document.getElementById('json').value = JSON.stringify(TEST_JSON,
+					null, 2);
+		}
+		if (window.TEST_SERVICE) {
+			document.getElementById('service').value = TEST_SERVICE;
+		}
+		/*
+		 * do a dummy login, just in case login is enabled, but not set-up
+		 */
+		Simplity.login('222', 'abcd');
+	};
+
+	var TEST_SERVICE = 'sp'
+	var TEST_JSON = {
+		txt : 'some text',
+		nbr : 765,
+		dat : '2016-11-23',
+		dec : 12.34,
+		txtArr : [ 'text1', 'text2', 'text3' ],
+		nbrArr : [ 12, 23, 34, 45 ],
+		decArr : [ 1.23, 2.34, 3.456, 4.5678 ],
+		datArr : [ '2001-01-01', '2002-02-26' ],
+		ds : {
+			txt : "simple text",
+			nbr : 101
+		},
+		dsArr : [ {
+			txt : "simple text 1",
+			nbr : 1234
+		}, {
+			txt : "simple text 2",
+			nbr : 2345
+		}, {
+			txt : "simple text 3",
+			nbr : 3456
+		} ],
+		cds : {
+			nbr : 1001,
+			txtArr : [ "txt1", "txt2" ],
+			ds : {
+				txt : "complex text",
+				nbr : 1111
+			},
+			dsArr : [ {
+				txt : "complex text 1",
+				nbr : 111
+			}, {
+				txt : "complex text 2",
+				nbr : 222
+			} ]
+		},
+		cdsArr :[
+			{
+				nbr : 101,
+				txtArr : [ "txt11", "txt22" ],
+				ds : {
+					txt : "complex text 1",
+					nbr : 111
+				},
+				dsArr : [ {
+					txt : "complex text 111",
+					nbr : 11
+				}, {
+					txt : "complex text 211",
+					nbr : 22
+				} ]
+			},
+			{
+				nbr : 102,
+				txtArr : [ "txt21", "txt22" ],
+				ds : {
+					txt : "complex text 21",
+					nbr : 21
+				},
+				dsArr : [ {
+					txt : "complex text 101",
+					nbr : 101
+				}, {
+					txt : "complex text 2",
+					nbr : 201
+				} ]
+			}
+		]
+	};
+
+	var test = function() {
+		var serviceName = document.getElementById('service').value;
+		if (!serviceName) {
+			Simplity.showMessage('Please enter the service name to test');
+			return;
+		}
+		var json = document.getElementById('json');
+		var data = json.value;
+		if (data) {
+			try {
+				var txt = JSON.stringify(JSON.parse(data), null, 2);
+				json.value = txt;
+			} catch (e) {
+				if (!confirm("Your json has syntax error. want to proceed?" + e)) {
+					return;
+				}
+			}
+		}
+		Simplity.getResponse(serviceName, data, showResponse);
+	};
+	var showResponse = function(data) {
+		document.getElementById('response').innerHTML = JSON.stringify(data,
+				null, 2);
+	};
+</script>
+</head>
+<body onload="login()">
+	<h1>Stored Procedure</h1>
+	<br />
+	<h4>Service name to invoke :</h4>
+	&nbsp;
+	<input id="service" style="width: 200px;" />
+	<br />
+	<br />
+	<h4>Json Input Data :</h4>
+	<textarea id="json" cols="50" rows="10"> </textarea>
+	<br />
+	<input type="button" value="Go... Get Response" onclick="test()" />
+	<br />
+	<br />
+	<h4>Response data</h4>
+	<pre id="response"></pre>
+</body>
+</html>
